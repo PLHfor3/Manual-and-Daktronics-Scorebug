@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ScoreBug</class>
+ <widget class="QMainWindow" name="ScoreBug">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -50,7 +50,7 @@
      <string>color: white; background-color: rgba(255, 255, 255, 10);</string>
     </property>
     <property name="text">
-     <string>#8 Creighton</string>
+     <string>Home</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -74,7 +74,7 @@
      <string notr="true">color: white;</string>
     </property>
     <property name="text">
-     <string>05.7</string>
+     <string>Game Clock</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -101,7 +101,7 @@
      <string notr="true">color: white; background-color: rgba(255, 255, 255, 10);</string>
     </property>
     <property name="text">
-     <string>Gross Catholic</string>
+     <string>Guest</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -125,7 +125,7 @@
      <string notr="true">color: white;</string>
     </property>
     <property name="text">
-     <string>17</string>
+     <string>SC</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -149,7 +149,7 @@
      <string>color: white;</string>
     </property>
     <property name="text">
-     <string>4th</string>
+     <string>Per: NA</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -176,7 +176,7 @@
      <string notr="true">color: white; background-color: rgba(255, 255, 255, 10);</string>
     </property>
     <property name="text">
-     <string>57</string>
+     <string>0</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -200,7 +200,7 @@
      <string notr="true">color: white; background-color: rgba(255, 255, 255, 10);</string>
     </property>
     <property name="text">
-     <string>19</string>
+     <string>0</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -352,9 +352,6 @@
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
     </property>
-    <property name="pixmap">
-     <pixmap>testlogo2.png</pixmap>
-    </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
@@ -379,9 +376,6 @@
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
-    </property>
-    <property name="pixmap">
-     <pixmap>testlogo1.webp</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -440,7 +434,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="homeBonus_2">
+   <widget class="QLabel" name="homePoss">
     <property name="geometry">
      <rect>
       <x>-20</x>
@@ -465,7 +459,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="homeBonus_3">
+   <widget class="QLabel" name="guestPoss">
     <property name="geometry">
      <rect>
       <x>1500</x>
@@ -491,8 +485,8 @@
     </property>
    </widget>
    <zorder>guestTOL</zorder>
-   <zorder>homeBonus_3</zorder>
-   <zorder>homeBonus_2</zorder>
+   <zorder>guestPoss</zorder>
+   <zorder>homePoss</zorder>
    <zorder>guestBonus</zorder>
    <zorder>homeBonus</zorder>
    <zorder>guestFouls</zorder>

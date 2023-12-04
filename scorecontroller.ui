@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ScoreController</class>
+ <widget class="QMainWindow" name="ScoreController">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -378,9 +378,6 @@ Shot Clock</string>
     <property name="text">
      <string/>
     </property>
-    <property name="pixmap">
-     <pixmap>testlogo1.webp</pixmap>
-    </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
@@ -396,9 +393,6 @@ Shot Clock</string>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>testlogo2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -417,7 +411,7 @@ Shot Clock</string>
      </rect>
     </property>
     <property name="text">
-     <string>#8 Creighton</string>
+     <string>Home</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="guestTeamName">
@@ -430,7 +424,7 @@ Shot Clock</string>
      </rect>
     </property>
     <property name="text">
-     <string>Gross Catholic</string>
+     <string>Guest</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

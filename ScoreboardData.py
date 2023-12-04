@@ -14,8 +14,8 @@ class ScoreboardData:
         self.__guestTOL = 4
         self.__homeFouls = 0
         self.__guestFouls = 0
-        self.shotClock = 0.0
-        self.gameClock = 4800.0
+        self.shotClock = config.defaultShotClockTime1
+        self.gameClock = config.defaultGameClockTime
         self.__period = 1
         self.__homeTeamName = "Home"
         self.__guestTeamName = "Guest"
@@ -36,20 +36,28 @@ class ScoreboardData:
         """
         return self.__guestScore
 
-    def modifyPeriod(self, value) -> None:
-        self.__period += value
+    def modifyPeriod(self, value: int) -> None:
+        """
+        Method to increase/decrease the current period
+        :param value: integer value to increase/decrease the period by
+        """
+        if self.__period + value >= 0:
+            self.__period += value
 
-    def setHomeName(self, name) -> None:
+    def getPeriod(self) -> int:
+        return self.__period
+
+    def setHomeName(self, name: str) -> None:
         """
         Set the Home Team Name
-        :return:
+        :param: the name of the home team
         """
         self.__homeTeamName = name
 
-    def setGuestName(self, name) -> None:
+    def setGuestName(self, name: str) -> None:
         """
         Set the Guest Team Name
-        :return:
+        :param: the name of the guest team
         """
         self.__guestTeamName = name
 
@@ -68,55 +76,83 @@ class ScoreboardData:
         return self.__guestTeamName
 
     def toggleHomeBonus(self) -> None:
+        """
+        Toggle whether the home bonus indicator is on or off
+        """
         if self.__homeBonus:
             self.__homeBonus = False
         else:
             self.__homeBonus = True
 
     def setHomeBonus(self, status: bool) -> None:
+        """
+        Method to set the status of the home bonus indicator
+        :param status: boolean value for whether the home bonus indicator is enabled or disabled
+        """
         self.__homeBonus = status
 
     def getHomeBonus(self) -> bool:
+        """
+        method to get the current home bonus indicator status
+        :return: the home bonus status
+        """
         return self.__homeBonus
 
     def toggleGuestBonus(self) -> None:
+        """
+        Toggle whether the guest bonus indicator is on or off
+        """
         if self.__guestBonus:
             self.__guestBonus = False
         else:
             self.__guestBonus = True
 
     def setGuestBonus(self, status: bool) -> None:
+        """
+        Method to set the status of the guest bonus indicator
+        :param status: boolean value for whether the guest bonus indicator is enabled or disabled
+        """
         self.__guestBonus = status
 
     def getGuestBonus(self) -> bool:
+        """
+        method to get the current guest bonus indicator status
+        :return: the guest bonus status
+        """
         return self.__guestBonus
 
     def modifyHomeScore(self, value) -> None:
-        self.__homeScore += value
+        if self.__homeScore + value >= 0:
+            self.__homeScore += value
 
     def modifyHomeFouls(self, value) -> None:
-        self.__homeFouls += value
+        if self.__homeFouls + value >= 0:
+            self.__homeFouls += value
 
     def getHomeFouls(self) -> int:
         return self.__homeFouls
 
     def modifyHomeTOL(self, value) -> None:
-        self.__homeTOL += value
+        if self.__homeTOL + value >= 0:
+            self.__homeTOL += value
 
     def getHomeTOL(self) -> int:
         return self.__homeTOL
 
     def modifyGuestScore(self, value) -> None:
-        self.__guestScore += value
+        if self.__guestScore + value >= 0:
+            self.__guestScore += value
 
     def modifyGuestFouls(self, value) -> None:
-        self.__guestFouls += value
+        if self.__guestFouls + value >= 0:
+            self.__guestFouls += value
 
     def getGuestFouls(self) -> int:
         return self.__guestFouls
 
     def modifyGuestTOL(self, value) -> None:
-        self.__guestTOL += value
+        if self.__guestTOL + value >= 0:
+            self.__guestTOL += value
 
     def getGuestTOL(self) -> int:
         return self.__guestTOL

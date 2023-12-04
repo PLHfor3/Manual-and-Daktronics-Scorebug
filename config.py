@@ -5,12 +5,16 @@ class Config:
 
     def __init__(self):
         config = configparser.ConfigParser()
-        self.defaultGameClockTime = 480.0
-        self.defaultShotClockTime1 = 35
-        self.defaultShotClockTime2 = 20
-        self.shotTenthOfSecondBelowFive = True
-        self.numberOfPeriods = 4
-        self.numberOfFoulsForBonus = 5
+        config.read("config.ini")
+        self.defaultGameClockTime = float(config['game options']['defaultGameClockTime'])
+        self.defaultShotClockTime1 = float(config['game options']['defaultShotClockTime1'])
+        self.defaultShotClockTime2 = float(config['game options']['defaultShotClockTime2'])
+        if config['game options']['shotTenthOfSecondBelowFive'] == "True":
+            self.shotTenthOfSecondBelowFive = True
+        else:
+            self.shotTenthOfSecondBelowFive = False
+        self.numberOfPeriods = int(config['game options']['numberOfPeriods'])
+        self.numberOfFoulsForBonus = int(config['game options']['numberOfFoulsForBonus'])
 
     def loadConfig(self) -> None:
-        pass
+        self.__init__()

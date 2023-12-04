@@ -3,15 +3,27 @@ from PyQt6.QtWidgets import *
 from ScorebugGUI import *
 
 
-class ScorebugLogic(QMainWindow, Ui_MainWindow):
+class ScorebugLogic(QMainWindow, Ui_ScoreBug):
 
     def __init__(self):
+        """
+        Initialize ScoreBug
+        """
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.setContentsMargins(0, 0, 0, 0)
-        # self.button_submit.clicked.connect(lambda: self.print_output())
-        # self.button_10.clicked.connect(lambda: self.update_tip_percent("10"))
-        # self.button_15.clicked.connect(lambda: self.update_tip_percent("15"))
-        # self.button_20.clicked.connect(lambda: self.update_tip_percent("20"))
-        # self.button_clear.clicked.connect(lambda: self.clear_all())
+
+    def mousePressEvent(self, event):
+        """
+        Method to help move frameless window when interacted with from the mouse
+        """
+        self.dragPos = event.globalPosition().toPoint()
+
+    def mouseMoveEvent(self, event):
+        """
+        Method to help move frameless window when interacted with from the mouse
+        """
+        self.move(self.pos() + event.globalPosition().toPoint() - self.dragPos)
+        self.dragPos = event.globalPosition().toPoint()
+        event.accept()
