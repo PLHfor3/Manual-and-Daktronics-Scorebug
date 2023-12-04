@@ -88,17 +88,22 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
         self.setShotTimer.clicked.connect(lambda: self.setShotClockFunc())
 
     def setMainClockFunc(self):
-        self.__scoreboardData.gameClock = self.getTimerValue("Game Clock", "Enter the game clock time in seconds: ")
-        self.scorebugWindow.mainClock.setText(self.formatGameTime(self.__scoreboardData.gameClock))
+        time = self.getTimerValue("Game Clock", "Enter the game clock time in seconds: ")
+        if time:
+            self.__scoreboardData.gameClock = time
+            self.scorebugWindow.mainClock.setText(self.formatGameTime(self.__scoreboardData.gameClock))
 
     def setShotClockFunc(self):
-        self.__scoreboardData.shotClock = self.getTimerValue("Shot Clock", "Enter the shot clock time in seconds: ")
-        self.scorebugWindow.shotClock.setText(self.formatShotTime(self.__scoreboardData.shotClock))
+        time = self.getTimerValue("Shot Clock", "Enter the shot clock time in seconds: ")
+        if time:
+            self.__scoreboardData.shotClock = time
+            self.scorebugWindow.shotClock.setText(self.formatShotTime(self.__scoreboardData.shotClock))
 
-    def getTimerValue(self, title, label):
+    def getTimerValue(self, title, label) -> str or bool:
         text, ok = QInputDialog.getDouble(self, title, label)
         if ok:
             return text
+        return False
 
     def resetGameClockFunc(self):
         self.__scoreboardData.gameClock = self.__scoreboardData.configuration.defaultGameClockTime

@@ -136,7 +136,7 @@ class Ui_ScoreController(object):
 
     def retranslateUi(self, ScoreController):
         _translate = QtCore.QCoreApplication.translate
-        ScoreController.setWindowTitle(_translate("ScoreController", "MainWindow"))
+        ScoreController.setWindowTitle(_translate("ScoreController", "Score Controller"))
         self.homeScore1.setText(_translate("ScoreController", "+1"))
         self.homeScore2.setText(_translate("ScoreController", "+2"))
         self.homeScore3.setText(_translate("ScoreController", "+3"))
