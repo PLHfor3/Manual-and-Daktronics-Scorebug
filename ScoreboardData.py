@@ -45,6 +45,10 @@ class ScoreboardData:
             self.__period += value
 
     def getPeriod(self) -> int:
+        """
+        Method to get the current period
+        :return: the current period
+        """
         return self.__period
 
     def setHomeName(self, name: str) -> None:
@@ -122,37 +126,77 @@ class ScoreboardData:
         return self.__guestBonus
 
     def modifyHomeScore(self, value) -> None:
+        """
+        Method to increase or decrease the home score
+        :param value: the number to modify the score by
+        """
         if self.__homeScore + value >= 0:
             self.__homeScore += value
 
     def modifyHomeFouls(self, value) -> None:
+        """
+        Method to increase or decrease the home fouls
+        :param value: the number to modify the fouls by
+        """
         if self.__homeFouls + value >= 0:
             self.__homeFouls += value
 
     def getHomeFouls(self) -> int:
+        """
+        Method to get the current home fouls
+        :return: the home fouls
+        """
         return self.__homeFouls
 
     def modifyHomeTOL(self, value) -> None:
+        """
+        Method to increase or decrease the home timouts left
+        :param value: the number to modify the timeouts by
+        """
         if self.__homeTOL + value >= 0:
             self.__homeTOL += value
 
     def getHomeTOL(self) -> int:
+        """
+        Method to get the current remaining home timeouts
+        :return: the home timeouts
+        """
         return self.__homeTOL
 
     def modifyGuestScore(self, value) -> None:
+        """
+        Method to increase or decrease the guest score
+        :param value: the number to modify the score by
+        """
         if self.__guestScore + value >= 0:
             self.__guestScore += value
 
     def modifyGuestFouls(self, value) -> None:
+        """
+        Method to increase or decrease the guest fouls
+        :param value: the number to modify the fouls by
+        """
         if self.__guestFouls + value >= 0:
             self.__guestFouls += value
 
     def getGuestFouls(self) -> int:
+        """
+        Method to get the current guest fouls
+        :return: the guest fouls
+        """
         return self.__guestFouls
 
     def modifyGuestTOL(self, value) -> None:
+        """
+        Method to increase or decrease the guest timouts left
+        :param value: the number to modify the timeouts by
+        """
         if self.__guestTOL + value >= 0:
             self.__guestTOL += value
 
     def getGuestTOL(self) -> int:
+        """
+        Method to get the current remaining guest timeouts
+        :return: the guest timeouts
+        """
         return self.__guestTOL

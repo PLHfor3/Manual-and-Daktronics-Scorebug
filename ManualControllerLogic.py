@@ -9,7 +9,12 @@ from ScorebugLogic import ScorebugLogic
 
 class ManualControllerLogic(QMainWindow, Ui_ScoreController):
 
-    def __init__(self, scoreboardData: ScoreboardData, scorebugWindow: ScorebugLogic):
+    def __init__(self, scoreboardData: ScoreboardData, scorebugWindow: ScorebugLogic) -> None:
+        """
+        Intialize the Manual Controller Window and form all connections
+        :param scoreboardData: the values containing scoreboard dats such as score and time
+        :param scorebugWindow: the window displaying all scoreboard data
+        """
         super().__init__()
         self.scorebugWindow = scorebugWindow
         self.setupUi(self)
@@ -87,29 +92,47 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
         self.setMainClock.clicked.connect(lambda: self.setMainClockFunc())
         self.setShotTimer.clicked.connect(lambda: self.setShotClockFunc())
 
-    def setMainClockFunc(self):
+    def setMainClockFunc(self) -> None:
+        """
+        Method to open a window to set the main clock
+        """
         time = self.getTimerValue("Game Clock", "Enter the game clock time in seconds: ")
         if time:
             self.__scoreboardData.gameClock = time
             self.scorebugWindow.mainClock.setText(self.formatGameTime(self.__scoreboardData.gameClock))
 
-    def setShotClockFunc(self):
+    def setShotClockFunc(self) -> None:
+        """
+        Method to open a window to set the shot clock
+        """
         time = self.getTimerValue("Shot Clock", "Enter the shot clock time in seconds: ")
         if time:
             self.__scoreboardData.shotClock = time
             self.scorebugWindow.shotClock.setText(self.formatShotTime(self.__scoreboardData.shotClock))
 
-    def getTimerValue(self, title, label) -> str or bool:
+    def getTimerValue(self, title: str, label: str) -> str or bool:
+        """
+        Method to open the input dialog window
+        :param title: the inout dialog window title
+        :param label: the inout dialog window label
+        :return: the user's input or False
+        """
         text, ok = QInputDialog.getDouble(self, title, label)
         if ok:
             return text
         return False
 
-    def resetGameClockFunc(self):
+    def resetGameClockFunc(self) -> None:
+        """
+        Method to reset the game clock to default config value
+        """
         self.__scoreboardData.gameClock = self.__scoreboardData.configuration.defaultGameClockTime
         self.scorebugWindow.mainClock.setText(self.formatGameTime(self.__scoreboardData.gameClock))
 
-    def resetShotClockFunc1Click(self):
+    def resetShotClockFunc1Click(self) -> None:
+        """
+        Method to reset the shot clock to the default configured full length shot clock value
+        """
         if self.shotClockisRunning:
             self.toggleShotClock()
             self.__scoreboardData.shotClock = self.__scoreboardData.configuration.defaultShotClockTime1
@@ -119,7 +142,10 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.__scoreboardData.shotClock = self.__scoreboardData.configuration.defaultShotClockTime1
             self.scorebugWindow.shotClock.setText(self.formatShotTime(self.__scoreboardData.shotClock))
 
-    def resetShotClockFunc2Click(self):
+    def resetShotClockFunc2Click(self) -> None:
+        """
+        Method to reset the shot clock to the default configured partial length shot clock value
+        """
         if self.shotClockisRunning:
             self.toggleShotClock()
             self.__scoreboardData.shotClock = self.__scoreboardData.configuration.defaultShotClockTime2
@@ -130,32 +156,46 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.scorebugWindow.shotClock.setText(self.formatShotTime(self.__scoreboardData.shotClock))
 
     def changeHomePoss(self) -> None:
+        """
+        Method to set the possession arrow to the home setting
+        """
         self.scorebugWindow.homePoss.setHidden(False)
         self.homePoss.setEnabled(False)
         self.guestPoss.setEnabled(True)
         self.scorebugWindow.guestPoss.setHidden(True)
 
     def changeGuestPoss(self) -> None:
+        """
+        Method to set the possession arrow to the guest setting
+        """
         self.scorebugWindow.homePoss.setHidden(True)
         self.homePoss.setEnabled(True)
         self.guestPoss.setEnabled(False)
         self.scorebugWindow.guestPoss.setHidden(False)
 
-    def setHomeLogoFunc(self):
+    def setHomeLogoFunc(self) -> None:
+        """
+        Method to open a file selector to select the home logo
+        """
         filePath = QFileDialog.getOpenFileName(self, "Select Home Team Logo", "", "All Files(*)")
         if filePath:
             self.scorebugWindow.homeLogo.setPixmap(QtGui.QPixmap(filePath[0]))
             self.homeLogo.setPixmap(QtGui.QPixmap(filePath[0]))
 
-    def setGuestLogoFunc(self):
+    def setGuestLogoFunc(self) -> None:
+        """
+        Method to open a file selector to select the guest logo
+        """
         filePath = QFileDialog.getOpenFileName(self, "Select Guest Team Logo", "", "All Files(*)")
         if filePath:
             self.scorebugWindow.guestLogo.setPixmap(QtGui.QPixmap(filePath[0]))
             self.guestLogo.setPixmap(QtGui.QPixmap(filePath[0]))
 
-    def toggleGameClock(self):
+    def toggleGameClock(self) -> None:
+        """
+        Method to toggle the game clock on or off
+        """
         if self.gameClockisRunning:
-            # self.currentTime = time.time()
             self.gameClockisRunning = False
             self.scorebugWindow.mainClock.setText(
                 self.formatGameTime(
@@ -173,7 +213,10 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.resetMainClock.setEnabled(False)
             self.setMainClock.setEnabled(False)
 
-    def updateGameClock(self):
+    def updateGameClock(self) -> None:
+        """
+        Helper method to be run every time the game clock timer object executes to update the game time
+        """
         self.currentGameTime = time.time()
         if self.__scoreboardData.gameClock - (self.currentGameTime - self.gameClockTimeAtStart) > 0.0:
             var = self.__scoreboardData.gameClock - (self.currentGameTime - self.gameClockTimeAtStart)
@@ -188,6 +231,11 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.__scoreboardData.gameClock = 0.0
 
     def formatGameTime(self, seconds: float) -> str:
+        """
+        Helper method to format the game clock output to be displayed on the scorebug
+        :param seconds: the number of seconds remaining in the game
+        :return: the string of the correctly formatted game time to be displayed on the scorebug
+        """
         if seconds < 60.0:
             return "%04.1f" % seconds
         elif seconds < 600.0:
@@ -199,7 +247,10 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             minSeconds = int(seconds % 60)
             return f"{minutes:02d}:{minSeconds:02d}"
 
-    def toggleShotClock(self):
+    def toggleShotClock(self) -> None:
+        """
+        Method to toggle the shot clock on or off
+        """
         if self.shotClockisRunning:
             # self.currentTime = time.time()
             self.shotClockisRunning = False
@@ -217,7 +268,10 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.shotClockTimer.start(10)
             self.setShotTimer.setEnabled(False)
 
-    def updateShotClock(self):
+    def updateShotClock(self) -> None:
+        """
+        Helper method to be run every time the shot clock timer object executes to update the shot time
+        """
         self.currentShotTime = time.time()
         if self.__scoreboardData.shotClock - (self.currentShotTime - self.shotClockTimeAtStart) > 0.0:
             var = self.__scoreboardData.shotClock - (self.currentShotTime - self.shotClockTimeAtStart)
@@ -231,12 +285,20 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
             self.__scoreboardData.shotClock = 0.0
 
     def formatShotTime(self, seconds: float) -> str:
+        """
+        Helper method to format the shot clock output to be displayed on the scorebug
+        :param seconds: the number of seconds remaining on the shot clock
+        :return: the string of the correctly formatted shot time to be displayed on the scorebug
+        """
         if seconds < 5.0 and self.__scoreboardData.configuration.shotTenthOfSecondBelowFive:
             return f"{seconds:.1f}"
         else:
             return f"{int(seconds)}"
 
-    def updateScoreBug(self):
+    def updateScoreBug(self) -> None:
+        """
+        Method to update all values displayed on the scorebug
+        """
         self.scorebugWindow.homeScore.setText(f"{self.__scoreboardData.getHomeScore()}")
         self.scorebugWindow.guestScore.setText(f"{self.__scoreboardData.getGuestScore()}")
         self.scorebugWindow.homeName.setText(f"{self.__scoreboardData.getHomeName()}")
@@ -265,6 +327,9 @@ class ManualControllerLogic(QMainWindow, Ui_ScoreController):
         else:
             self.scorebugWindow.guestBonus.setHidden(True)
 
-    def closeEvent(self, *args, **kwargs):
+    def closeEvent(self, *args, **kwargs) -> None:
+        """
+        Method to help close all windows when the controller window is closed
+        """
         super(QtGui.QMainWindow, self).closeEvent(*args, **kwargs)
         self.scorebugWindow.close()

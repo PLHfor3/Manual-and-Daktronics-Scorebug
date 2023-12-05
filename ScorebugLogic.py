@@ -5,7 +5,7 @@ from ScorebugGUI import *
 
 class ScorebugLogic(QMainWindow, Ui_ScoreBug):
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize ScoreBug
         """
@@ -14,13 +14,13 @@ class ScorebugLogic(QMainWindow, Ui_ScoreBug):
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.setContentsMargins(0, 0, 0, 0)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event) -> None:
         """
         Method to help move frameless window when interacted with from the mouse
         """
         self.dragPos = event.globalPosition().toPoint()
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent(self, event) -> None:
         """
         Method to help move frameless window when interacted with from the mouse
         """
